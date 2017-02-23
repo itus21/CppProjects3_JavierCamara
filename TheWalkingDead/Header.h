@@ -6,6 +6,7 @@
 enum class Weapon { FISTS, GUN, SHOTGUN, REVOLVER, SNIPER, MACHINE_GUN, MAX }; //Fuertemente tipado (enum class)
 
 class Zombie; // Se declara la funcion antes porque si no en Player no la encuentra
+
 class Player
 {
 public:
@@ -90,3 +91,4 @@ private:
 };
 
 Zombie::Zombie(): distanceToPlayer(20+rand() % 200-20)), speed(rand() % 20 / 10), damage(rand() % 20 / 10) {}
+
