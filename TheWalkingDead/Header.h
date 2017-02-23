@@ -18,7 +18,7 @@ public:
 
 private:
 
-	void attack(Zombie&)
+	void attack(Zombie&Zomb)
 	{
 		int damage;
 		switch (arma)
@@ -41,23 +41,20 @@ private:
 		case Weapon::MACHINE_GUN:
 			damage = 5 * precision;
 			break;
-		case Weapon::MAX:
-			break;
 
 		default:
 			break;
 		}
+		Zomb.life = Zomb.life - damage;
 	}
 	
 	bool isAlive()
 	{
-
+		return life > 0;
 	}
 };
 
-Player::Player()
-{
-}
+Player::Player(): arma(static_cast <Weapon>(rand()%static_cast<int>(Weapon::MAX))), precision(rand() % 20 / 10), life(100) {}
 
 
 class Zombie
@@ -65,27 +62,31 @@ class Zombie
 public:
 
 	int distanceToPlayer;
-	float speed ;
+	float speed;
 	float damage;
+	int life;
 	Zombie();
 
 
 private:
 
-	void attack(Player&) 
+	void attack(Player&Pl) 
 	{
-
+		if (distanceToPlayer==0)
+		{
+			Pl.life = Pl.life - damage;
+		}
+		else
+		{
+			distanceToPlayer = distanceToPlayer - 1;
+		}
 	}
 
 	bool isAlive() 
 	{
-
+		return life > 0;
 	}
 
 };
 
-Zombie::Zombie()
-{
-}
-
-
+Zombie::Zombie(): distanceToPlayer(20+rand() % 200-20)), speed(rand() % 20 / 10), damage(rand() % 20 / 10) {}
